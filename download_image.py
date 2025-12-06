@@ -17,12 +17,12 @@ def download_image(url, save_path):
                 for chunk in response.iter_content(chunk_size=8192):
                     if chunk:
                         file.write(chunk)
-            print(f"✅ Tải ảnh thành công: {save_path}")
+            print(f"✅ image load {save_path}")
         else:
-            print(f"❌ Lỗi khi tải ảnh. Mã trạng thái: {response.status_code}")
+            print(f"❌ error during image loading{response.status_code}")
 
     except requests.exceptions.RequestException as e:
-        print(f"❌ Lỗi kết nối: {e}")
+        print(f"❌ connection error {e}")
 
 
 
@@ -33,21 +33,11 @@ def read_image_urls_from_excel(file_path, sheet_name='Too large images', column_
             url_col= df[column_name].dropna().tolist()
             return url_col
         else:
-            print(f"❌ Cột '{column_name}' không tồn tại trong sheet '{sheet_name}'.")
             return []
     except Exception as e:
-        print(f"❌ Lỗi khi đọc file Excel: {e}")
+        print(f"❌ excel reading error: {e}")
         return []
-def main():
-    excel_file_path = 'image_urls.xlsx'  # Đường dẫn tới file Excel
-    sheet_name = 'Too large images'  # Tên sheet chứa URL ảnh
-    column_name = 'Image URL'  # Tên cột chứa URL ảnh
 
-    image_urls = read_image_urls_from_excel(excel_file_path, sheet_name, column_name)
-
-    for index, url in enumerate(image_urls):
-        save_path = f'image_{index + 1}.jpg'  # Đặt tên file ảnh theo chỉ số
-        download_image(url, save_path)
 
 url_col=read_image_urls_from_excel('./voco_audit.xlsx')
 print(len(url_col))
