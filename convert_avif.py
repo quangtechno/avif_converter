@@ -22,12 +22,12 @@ def convert_avif(input_path, quality=100):
         output_path = os.path.join("./avif_image_folder", output_filename)
         img.save(output_path, format="AVIF", quality=quality)
         
-        print(f"✅ Chuyển đổi thành công: '{input_path}' -> '{output_path}' (Chất lượng: {quality})")
+        print(f"✅convert sucessfully: '{input_path}' -> '{output_path}' (quality: {quality})")
         
     except FileNotFoundError:
-        print(f"❌ Lỗi: Không tìm thấy file đầu vào tại {input_path}")
+        print(f"❌ input file not found {input_path}")
     except Exception as e:
-        print(f"❌ Lỗi khi chuyển đổi sang AVIF: {e}")
+        print(f"❌ error during converting to AVIF : {e}")
 def found_input_and_convert():
     for root, dirs, files in os.walk('./download_image'):
         for file in files:
