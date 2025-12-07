@@ -14,9 +14,9 @@ def convert_avif(input_path, quality=100):
         current_width, current_height = current_size
         if(current_width>1920 or current_height>1080):
             new_width = 1920
-            new_height = new_width * current_height // current_width
+            new_height = round(new_width * current_height / current_width)
             img=img.resize((new_width, new_height))
-            filename_only=filename_only.split('-')[0] + f'-{new_width}x{new_height}'
+            filename_only=filename_only.split('-')[0]+f'-{current_width}x{current_height}'+ f'-{new_width}x{new_height}'
             
         output_filename = filename_only + ".avif"
         output_path = os.path.join("./avif_image_folder", output_filename)
